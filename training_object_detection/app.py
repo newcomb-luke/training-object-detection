@@ -11,33 +11,34 @@ import pickle
 from keras.models import model_from_json
 import matplotlib.pyplot as plt
 
+BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+TRAIN_IMAGES_DIR = BASE_DIR + 'images/train/'
+TEST_IMAGES_DIR = BASE_DIR + 'images/test/'
 
 def run():
-    image_width, image_height= 256, 256
+    image_width, image_height= 400, 300
 
-    nb_train_samples= 11000
-    nb_validation_sample=2000
-    batch_size = 8
+    batch_size = 2
 
-    # model = applications.mobilenet_v2.MobileNetV2(weights= "imagenet", include_top=False, input_shape=(image_height, image_width, 3))
-    model = applications.mobilenetv2(weights= "imagenet", include_top=False, input_shape=(image_height, image_width, 3))
+    model = applications.mobilenet_v2.MobileNetV2(weights= "imagenet", include_top=False, input_shape=(image_height, image_width, 3))
+    # model = applications.mobilenetv2(weights= "imagenet", include_top=False, input_shape=(image_height, image_width, 3))
 
     x=model.layers[7].output
     #take the first 5 layers of the model
     x=Flatten()(x)
-    x=Dense(1024, activation="relu")(x)
+    # x=Dense(1024, activation="relu")(x)
+    x=Dense(512, activation="relu")(x)
     x=Dropout(0.5)(x)
     x=Dense(384, activation="relu")(x)
     x=Dropout(0.5)(x)
     x=Dense(96, activation="relu")(x)
     x=Dropout(0.5)(x)
-    predictions = Dense(30, activation="softmax")(x)
+    predictions = Dense(1, activation="softmax")(x)
 
 
-    model_final = Model(input=model.input, output=predictions)
+    model_final = Model(input = model.input, output = predictions)
 
-    model_final = model_final.load_weights("weights_Mobile_Net.h5")
-    model_final.compile(loss="categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
+    model_final.compile(loss="sparse_categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
 
     train_datagen = ImageDataGenerator(rescale = 1./255,
                                     shear_range = 0.2,
@@ -45,20 +46,18 @@ def run():
                                     horizontal_flip = True,
                                     fill_mode="nearest",
                                     width_shift_range=0.3,
-                                    height_shift_range=0.3,
-                                    rotation_range=30)
+                                    height_shift_range=0.3)
 
     test_datagen = ImageDataGenerator(rescale = 1./255,
-    horizontal_flip = True,
-    fill_mode = "nearest",
-    zoom_range = 0.3,
-    width_shift_range = 0.3,
-    height_shift_range=0.3,
-    rotation_range=30)
+                                    horizontal_flip = True,
+                                    fill_mode = "nearest",
+                                    zoom_range = 0.3,
+                                    width_shift_range = 0.3,
+                                    height_shift_range=0.3)
 
-    training_set = train_datagen.flow_from_directory('./HE_Chal', target_size = (256, 256), batch_size = 8,class_mode = 'categorical')
-    test_set = test_datagen.flow_from_directory('./Validation', target_size = (256, 256), batch_size = 8, class_mode = 'categorical') 
-    model_final.fit_generator(training_set, steps_per_epoch = 1000,epochs = 80, validation_data = test_set,validation_steps=1000)
+    training_set = train_datagen.flow_from_directory(TRAIN_IMAGES_DIR, target_size = (image_height, image_width), batch_size = batch_size,class_mode = 'categorical')
+    test_set = test_datagen.flow_from_directory(TEST_IMAGES_DIR, target_size = (image_height, image_width), batch_size = batch_size, class_mode = 'categorical') 
+    model_final.fit_generator(training_set, steps_per_epoch = 1000, epochs = 80, validation_data = test_set, validation_steps = 1000)
     print(model.summary())
 
     #uncomment the follwoing to save your weights and model.
