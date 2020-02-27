@@ -11,7 +11,8 @@ import pickle
 from keras.models import model_from_json
 import matplotlib.pyplot as plt
 
-BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+# BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+BASE_DIR = '/home/luke/Documents/git-repositories/training-object-detection/'
 TRAIN_IMAGES_DIR = BASE_DIR + 'images/train/'
 TEST_IMAGES_DIR = BASE_DIR + 'images/test/'
 
@@ -38,7 +39,7 @@ def run():
 
     model_final = Model(input = model.input, output = predictions)
 
-    model_final.compile(loss="sparse_categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
+    model_final.compile(loss="categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
 
     train_datagen = ImageDataGenerator(rescale = 1./255,
                                     shear_range = 0.2,

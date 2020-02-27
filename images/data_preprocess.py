@@ -2,7 +2,9 @@ import os
 import random
 import shutil
 
-BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+# BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+
+BASE_DIR = '/home/luke/Documents/git-repositories/training-object-detection/'
 
 ALL_IMAGES_DIR =  BASE_DIR + 'images/all/'
 TRAIN_IMAGES_DIR = BASE_DIR + 'images/train/'
