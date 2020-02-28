@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>image_304.png</filename>
+	<path>/home/luke/Documents/git-repos/vision-testing/tensorflow-object-detection/test_model/images/train/image_304.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>400</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>target</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>202</xmin>
+			<ymin>46</ymin>
+			<xmax>287</xmax>
+			<ymax>91</ymax>
+		</bndbox>
+	</object>
+</annotation>
