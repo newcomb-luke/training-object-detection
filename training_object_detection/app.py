@@ -11,9 +11,10 @@ import pickle
 from keras.models import model_from_json
 import matplotlib.pyplot as plt
 
-BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
-TRAIN_IMAGES_DIR = BASE_DIR + 'images_new/train/'
-TEST_IMAGES_DIR = BASE_DIR + 'images_new/valid/'
+# BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+BASE_DIR = '/home/luke/Documents/git-repositories/training-object-detection/'
+TRAIN_IMAGES_DIR = BASE_DIR + 'images/train/'
+TEST_IMAGES_DIR = BASE_DIR + 'images/test/'
 
 def run():
     image_width, image_height= 200, 200
