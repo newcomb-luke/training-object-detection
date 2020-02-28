@@ -12,11 +12,11 @@ from keras.models import model_from_json
 import matplotlib.pyplot as plt
 
 BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
-TRAIN_IMAGES_DIR = BASE_DIR + 'images/train/'
-TEST_IMAGES_DIR = BASE_DIR + 'images/test/'
+TRAIN_IMAGES_DIR = BASE_DIR + 'images_new/train/'
+TEST_IMAGES_DIR = BASE_DIR + 'images_new/valid/'
 
 def run():
-    image_width, image_height= 400, 300
+    image_width, image_height= 200, 200
 
     batch_size = 2
 
@@ -33,12 +33,12 @@ def run():
     x=Dropout(0.5)(x)
     x=Dense(96, activation="relu")(x)
     x=Dropout(0.5)(x)
-    predictions = Dense(1, activation="softmax")(x)
+    predictions = Dense(2, activation="softmax")(x)
 
 
     model_final = Model(input = model.input, output = predictions)
 
-    model_final.compile(loss="sparse_categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
+    model_final.compile(loss="categorical_crossentropy", optimizer=optimizers.nadam(lr=0.00001), metrics=["accuracy"])
 
     train_datagen = ImageDataGenerator(rescale = 1./255,
                                     shear_range = 0.2,
