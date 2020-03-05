@@ -2,14 +2,16 @@ import os
 import random
 import shutil
 
-BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
+# BASE_DIR = '/home/luke/Documents/git-repos/training-object-detection/'
 
-TARGET_IMAGES_DIR =  BASE_DIR + 'images_new/target/'
-NOTARGET_IMAGES_DIR =  BASE_DIR + 'images_new/no_target/'
-TRAIN_IMAGES_DIR = BASE_DIR + 'images_new/train/'
-TEST_IMAGES_DIR = BASE_DIR + 'images_new/valid/'
+BASE_DIR = '/home/luke/Documents/git-repositories/training-object-detection/'
 
-TRAIN_PERCENT = 60
+TARGET_IMAGES_DIR =  BASE_DIR + 'training_set/target/'
+NOTARGET_IMAGES_DIR =  BASE_DIR + 'training_set/no_target/'
+TRAIN_IMAGES_DIR = BASE_DIR + 'training_set/train/'
+TEST_IMAGES_DIR = BASE_DIR + 'training_set/valid/'
+
+TRAIN_PERCENT = 75
 
 def main():
     
@@ -84,14 +86,14 @@ def main():
     
     for i, file_path in enumerate(train_images_notarget):
         file_ext = file_path.split('.')[1]
-        file_name = 'target{:04}.{}'.format(i, file_ext)
+        file_name = 'no_target{:04}.{}'.format(i, file_ext)
         source = os.path.join( NOTARGET_IMAGES_DIR, file_path )
         destination = os.path.join( train_notarget_dir, file_name )
         shutil.copyfile(source, destination)
     
     for i, file_path in enumerate(test_images_notarget):
         file_ext = file_path.split('.')[1]
-        file_name = 'target{:04}.{}'.format(i, file_ext)
+        file_name = 'no_target{:04}.{}'.format(i, file_ext)
         source = os.path.join( NOTARGET_IMAGES_DIR, file_path )
         destination = os.path.join( test_notarget_dir, file_name )
         shutil.copyfile(source, destination)

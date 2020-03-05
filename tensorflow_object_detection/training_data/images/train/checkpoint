@@ -1,0 +1,6 @@
+model_checkpoint_path: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-1219"
+all_model_checkpoint_paths: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-889"
+all_model_checkpoint_paths: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-972"
+all_model_checkpoint_paths: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-1054"
+all_model_checkpoint_paths: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-1136"
+all_model_checkpoint_paths: "/home/luke/Documents/git-repositories/training-object-detection/tensorflow_object_detection/training_data/images/train/model.ckpt-1219"
